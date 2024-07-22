@@ -1,6 +1,5 @@
 package com.generation.farmacia.model;
 
-
 import java.sql.Date;
 import java.time.LocalDateTime;
 
