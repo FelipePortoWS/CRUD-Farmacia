@@ -1,15 +1,16 @@
 package com.generation.farmacia.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
-
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,13 +31,16 @@ public class Produto {
 	@NotNull(message = "O atributo é obrigatório")
 	private Float preco;
 
-	private Date validade;
 
 	@NotNull(message = "O atributo é obrigatório")
 	private int quantidade;
 
 	@UpdateTimestamp
 	private LocalDateTime dataDeRegistro;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -70,20 +74,20 @@ public class Produto {
 		this.dataDeRegistro = dataDeRegistro;
 	}
 
-	public Date getValidade() {
-		return validade;
-	}
-
-	public void setValidade(Date validade) {
-		this.validade = validade;
-	}
-
 	public int getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
